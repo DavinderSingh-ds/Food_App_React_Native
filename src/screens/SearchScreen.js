@@ -21,7 +21,8 @@ const SearchScreen = () => {
     }
 // flex property auto expand and collapse
     return(
-        <View style={{ flex : 1 }}>
+        // <View style={{ flex : 1 }}>
+        <>
             <SearchBar 
                 term={term}
                 onTermChange={setTerm}
@@ -45,8 +46,9 @@ const SearchScreen = () => {
                     results={filterResultsByPrice('$$$')}
                     title="Big Spender"  
                 />
-            </ScrollView>    
-        </View>
+            </ScrollView>      
+        {/* </View> */}
+        </>
     );
 };
 
