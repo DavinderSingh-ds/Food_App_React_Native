@@ -3,48 +3,11 @@
 import React,{useState,useEffect} from 'react';
 import {View,Text,StyleSheet} from 'react-native';
 import SearchBar from '../components/SearchBar';
-import yelp from '../api/yelp';
+import useResults from '../hooks/useResults';
 
 const SearchScreen = () => {
     const [term, setTerm] = useState('');
-    //this state is created for yelp api objects
-    const [results, setResults] = useState([]);
-    // this state is for api handling try catch
-    const [errorMessage, setErrorMessage] = useState('');
-
-    //helper function
-    // '/search' is a route linked with api
-
-    const searchApi = async (searchTerm) => {
-        //console.log('Hi there!');
-        try {
-            const response = await yelp.get('/search',{
-                params: {
-                    limit : 50,
-                    term: searchTerm,
-                    location: 'san jose'
-                }
-            });
-            setResults(response.data.businesses);
-        } catch (err) {
-            // console.log(err);
-            setErrorMessage("Something went wrong!");
-        }
-       
-        
-    }
-
-    //fetch is used fot making network requests
-    //axios separate library to making requests
-
-    //Call search Api when component
-    //is first rendered. but this is BAD CODE so don.t use this searchApi()
-    // searchApi('pasta');
-
-    //useEffect Hook with two arguments 
-    useEffect(() => {
-        searchApi('pasta');
-    },[]);
+    const [searchApi, results, errorMessage] = useResults();
 
     return(
         <View>
