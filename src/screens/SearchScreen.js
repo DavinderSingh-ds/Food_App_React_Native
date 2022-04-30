@@ -5,22 +5,29 @@ import yelp from '../api/yelp';
 
 const SearchScreen = () => {
     const [term, setTerm] = useState('');
-
     //this state is created for yelp api objects
     const [results, setResults] = useState([]);
+    // this state is for api handling try catch
+    const [errorMessage, setErrorMessage] = useState('');
 
     //helper function
     // '/search' is a route linked with api
 
     const searchApi = async () => {
-        const response = await yelp.get('/search',{
-            params: {
-                limit : 50,
-                term,
-                location: 'san jose'
-            }
-        });
-        setResults(response.data.businesses);
+        try {
+            const response = await yelp.get('/search',{
+                params: {
+                    limit : 50,
+                    term,
+                    location: 'san jose'
+                }
+            });
+            setResults(response.data.businesses);
+        } catch (err) {
+            // console.log(err);
+            setErrorMessage("Something went wrong!");
+        }
+       
         
     }
 
@@ -34,7 +41,9 @@ const SearchScreen = () => {
                 onTermChange={setTerm}
                 onTermSubmit={searchApi}
                 />
-            <Text>Search Screen</Text>
+           {errorMessage 
+                ? <Text>{errorMessage}</Text> 
+                : null } 
             <Text>We have found {results.length} results.</Text>
         </View>
     );
