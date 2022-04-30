@@ -13,12 +13,13 @@ const SearchScreen = () => {
     //helper function
     // '/search' is a route linked with api
 
-    const searchApi = async () => {
+    const searchApi = async (searchTerm) => {
+        console.log('Hi there!');
         try {
             const response = await yelp.get('/search',{
                 params: {
                     limit : 50,
-                    term,
+                    term: searchTerm,
                     location: 'san jose'
                 }
             });
@@ -34,12 +35,16 @@ const SearchScreen = () => {
     //fetch is used fot making network requests
     //axios separate library to making requests
 
+    //Call search Api when component
+    //is first rendered. but this is BAD CODE so don.t use this searchApi()
+    // searchApi('pasta');
+
     return(
         <View>
             <SearchBar 
                 term={term}
                 onTermChange={setTerm}
-                onTermSubmit={searchApi}
+                onTermSubmit={() => searchApi(term)}
                 />
            {errorMessage 
                 ? <Text>{errorMessage}</Text> 
