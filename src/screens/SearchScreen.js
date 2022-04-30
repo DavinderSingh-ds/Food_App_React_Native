@@ -1,4 +1,6 @@
-import React,{useState} from 'react';
+// useEffect is a Hook
+// useState(()=> {})  ,  useState(()=> {},[ ])  ,  useState(()=> {},[value])
+import React,{useState,useEffect} from 'react';
 import {View,Text,StyleSheet} from 'react-native';
 import SearchBar from '../components/SearchBar';
 import yelp from '../api/yelp';
@@ -14,7 +16,7 @@ const SearchScreen = () => {
     // '/search' is a route linked with api
 
     const searchApi = async (searchTerm) => {
-        console.log('Hi there!');
+        //console.log('Hi there!');
         try {
             const response = await yelp.get('/search',{
                 params: {
@@ -38,6 +40,11 @@ const SearchScreen = () => {
     //Call search Api when component
     //is first rendered. but this is BAD CODE so don.t use this searchApi()
     // searchApi('pasta');
+
+    //useEffect Hook with two arguments 
+    useEffect(() => {
+        searchApi('pasta');
+    },[]);
 
     return(
         <View>
