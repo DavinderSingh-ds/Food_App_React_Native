@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         // alignItems: 'center',
         marginTop: 15,
+        marginBottom: 10,
     },
     inputStyle: {
         // borderColor: 'black',
