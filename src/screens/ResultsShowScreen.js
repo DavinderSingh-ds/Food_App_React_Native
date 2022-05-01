@@ -33,8 +33,7 @@ const ResultsShowScreen = ({navigation,route}) => {
                 renderItem={({item}) => {
                     return  (
                         <Image style={styles.image} source={{uri: item}}/> 
-                    );
-                        
+                    );      
                 }}
             />
         </View>
